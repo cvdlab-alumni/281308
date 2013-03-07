@@ -8,7 +8,7 @@ for (var i = 1; i < 11; i++) {
 	};
 	console.log(line);
 	if(i!==10)
-	line = "";
+		line = "";
 };
 
 console.log("\n");
@@ -22,7 +22,7 @@ for (var i = 1; i < 11; i++) {
 	};
 	console.log(line);
 	if(i!==10)
-	line = "";
+		line = "";
 };
 
 console.log("\n");
@@ -41,5 +41,5 @@ for (var i = 1; i < 11; i++) {
 	};
 	console.log(line);
 	if(i!==10)
-	line = "";
+		line = "";
 };

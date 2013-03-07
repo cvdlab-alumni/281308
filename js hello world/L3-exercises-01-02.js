@@ -23,5 +23,5 @@ function fibonacci(n) {
 	return fibonacci[n];
 }
 
-fibonacci[0] = 1;
+fibonacci[0] = 0;
 fibonacci[1] = 1;

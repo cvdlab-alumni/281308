@@ -147,7 +147,6 @@ triangularBalcony2_cells = [[0,2,3]];
 triangularBalcony2d = SIMPLICIAL_COMPLEX(triangularBalcony2_point)(triangularBalcony2_cells);
 floors2c = T([1,3])([5.50,0.2])(R([1,3])(PI)(EXTRUDE([floorDepth])(triangularBalcony2d)));
 floors2 = T([3])([pillar0Height + pillar1e2Height])(STRUCT([floors2a, floors2b, floors2c]));
-//T([1,2])([5.50,0.4])(R([1,3])(PI)(
 
 //third floor
 floors3 = T([3])([pillar0Height + 2*pillar1e2Height])(floorFull);
@@ -164,35 +163,56 @@ floors4 = T([3])([pillar0Height + 2*pillar1e2Height + pillar3Height])(STRUCT([fl
 //                         VERTICALS - begin
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//north = ;
-//south = ;
+#north = ;
+#south = ;
 
-//east ground floor
+#east wall
+#east ground floor
 east0a = GRID([[9],[-6.45, 0.25],[2]]);
 east0b = GRID([[7.2, -0.7, 1.1],[-6.45, 0.25],[-2, 0.7]]);
 east0 = STRUCT([east0a, east0b]);
-//east first floor
+#east first floor
 east1a = GRID([[floorLenght],[-6.45, 0.25],[0.8]]);
-east1b = GRID([[6.25, -2.50, 2.50],[-6.45, 0.25],[-0.8, pillar1e2Height-0.7-0.30]]);
-east1c = GRID([[floorLenght],[-6.45, 0.25],[-0.8, -pillar1e2Height-0.20, 0.1]]);
+east1b = GRID([[6.25, -2.50, 2.50],[-6.45, 0.25],[-0.8, pillar1e2Height-0.8-floorDepth]]);
 east1 = T([3])([pillar0Height+floorDepth])(STRUCT([east1a, east1b]));
-//east second floor
+#east second floor
 east2a = GRID([[floorLenght],[-6.45, 0.25],[0.8]]);
-east2b = GRID([[9.25, -0.1, 0.35, -0.1, 1.45],[-6.45, 0.25],[-0.8, pillar1e2Height-0.8-0.20]]);
+east2b = GRID([[9.25, -0.1, 0.35, -0.1, 1.45],[-6.45, 0.25],[-0.8, pillar1e2Height-0.8-floorDepth]]);
 east2 = T([3])([pillar0Height+pillar1e2Height+floorDepth])(STRUCT([east2a, east2b]));
-//east third floor
+#east third floor
 east3a = GRID([[5.50],[-6.60, 0.10],[pillar3Height-0.2]]);
 east3b = GRID([[-5.50, 5.75],[-6.45, 0.25],[pillar3Height-0.2]]);
 east3 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+floorDepth])(STRUCT([east3a, east3b]));
-//east fourth floor
+#east fourth floor
 east4 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(GRID([[floorLenght],[-6.60, 0.1],[0.4]]));
+#east wall composition
 east = STRUCT([east0, east1, east2, east3, east4]);
-//west = ;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                         VERTICALS - end
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#west wall
+#west ground floor
+#west0a = GRID([[9],[0.25],[2]]);
+#west1b = GRID([[6.25, -2.50, 2.50],[0.25],[-0.8, pillar1e2Height-0.7-0.30]]);
+#west0 = STRUCT([west0a, west0b]);
+#west first floor
+west1a = GRID([[floorLenght],[0.25],[0.8]]);
+west1b = GRID([[5.75, -2.50, 2.75],[0.25],[-0.8, pillar1e2Height-0.8-floorDepth]]);
+westBaseWall = STRUCT([west1a, west1b]);
+west1 = T([3])([pillar0Height+floorDepth])(westBaseWall);
+#west second floor
+west2 = T([3])([pillar0Height+pillar1e2Height+floorDepth])(westBaseWall);
+#west third floor
+west3a = GRID([[11.25],[0.25],[0.8]]);
+west3b = GRID([[-6, -2.50, 2.50],[0.25],[-0.8, pillar3Height-0.8-floorDepth]]);
+west3 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+floorDepth])(STRUCT([west3a, west3b]));
+#west fourth floor
+west4 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(GRID([[-5.50, 5.75],[0.1],[0.4]]));
+#west wall composition
+west = STRUCT([west1, west2, west3, west4]);
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east]);
+#####################################################################
+#                         VERTICALS - end
+#####################################################################
+
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west]);
 
 VIEW(building)

@@ -140,14 +140,13 @@ floors1balcony = T([1,2])([-1.10,5.25])(balconyBase);
 floors1 = T([3])([pillar0Height])(STRUCT([floorFull, floors1balcony]));
 
 //second floor
-floors2a = GRID([[5.50],[-5.25, 1.45],[floorDepth]]);
+floors2a = GRID([[5.50],[0.25, -5.0, 1.45],[floorDepth]]);
 floors2b = GRID([[-5.50,5.75],[6.70],[floorDepth]]);
 triangularBalcony2_point = [[0,0],[1.25,0],[1.25,5.25],[0,5.25]];
 triangularBalcony2_cells = [[0,2,3]];
 triangularBalcony2d = SIMPLICIAL_COMPLEX(triangularBalcony2_point)(triangularBalcony2_cells);
 floors2c = T([1,3])([5.50,0.2])(R([1,3])(PI)(EXTRUDE([floorDepth])(triangularBalcony2d)));
 floors2 = T([3])([pillar0Height + pillar1e2Height])(STRUCT([floors2a, floors2b, floors2c]));
-//T([1,2])([5.50,0.4])(R([1,3])(PI)(
 
 //third floor
 floors3 = T([3])([pillar0Height + 2*pillar1e2Height])(floorFull);

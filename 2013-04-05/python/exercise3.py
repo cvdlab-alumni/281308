@@ -131,15 +131,15 @@ east = STRUCT([east0, east1, east2, east3, east4]);
 west1a = GRID([[floorLenght],[0.25],[0.8]]);
 west1b = GRID([[5.75, -2.50, 2.75],[0.25],[-0.8, pillar1e2Height-0.8-floorDepth]]);
 westBaseWall = STRUCT([west1a, west1b]);
-west1 = T([3])([pillar0Height+floorDepth])(westBaseWall);
+west1 = T([2,3])([-0.001,pillar0Height+floorDepth])(westBaseWall);
 #west second floor
-west2 = T([3])([pillar0Height+pillar1e2Height+floorDepth])(westBaseWall);
+west2 = T([2,3])([-0.001,pillar0Height+pillar1e2Height+floorDepth])(westBaseWall);
 #west third floor
 west3a = GRID([[11.25],[0.25],[0.8]]);
 west3b = GRID([[-6, -2.50, 2.50],[0.25],[-0.8, pillar3Height-0.8-floorDepth]]);
-west3 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+floorDepth])(STRUCT([west3a, west3b]));
+west3 = T([2,3])([-0.001,pillar0Height+pillar1e2Height+pillar1e2Height+floorDepth])(STRUCT([west3a, west3b]));
 #west fourth floor
-west4 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(GRID([[-5.50, 5.75],[0.1],[0.4]]));
+west4 = T([2,3])([-0.001,pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(GRID([[-5.50, 5.75],[0.1],[0.4]]));
 #west wall composition
 west = STRUCT([west1, west2, west3, west4]);
 

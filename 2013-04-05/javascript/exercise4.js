@@ -225,6 +225,27 @@ south4 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+flo
 //south wall composition
 //south = STRUCT([south0, south1, south2, south3, south4]);
 south = STRUCT([south0, south4]);
+function arc(alpha, r, R){
+  var domain = DOMAIN([[0,alpha],[r,R]])([36,1]);
+  var mapping = function (v){
+    var a = v[0];
+    var r = v[1];
+    return [r*COS(a), r*SIN(a)];
+  }
+  var model = MAP(mapping)(domain);
+  return model;
+}
+
+//arco1 = PROD([arc(PI,0.75,1), Q(pillar0Height)]);
+//arco2 = PROD([arc(PI,2.75,3), Q(pillar0Height)]);
+
+arch1 = T([1,2])([2.45+0.73, 1.65])(R([1,2])(PI)(EXTRUDE([pillar0Height])(arc(PI,0.48,0.73))));
+arch2 = T([1,2])([2.45+5.80+0.75,4.70])(R([1,2])(3*PI/2)(EXTRUDE([pillar0Height])(arc(PI,1.75,2))));
+arches = STRUCT([arch1,arch2]);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                         VERTICALS - end
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                         VERTICALS - end
@@ -249,6 +270,6 @@ windowsFrames = STRUCT([windowBig, windowBig2, planeFrame]);
 //                         WINDOWS - end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, windowsFrames]);
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, windowsFrames, arches]);
 
 VIEW(building)

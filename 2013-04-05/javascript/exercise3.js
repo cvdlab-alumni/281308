@@ -190,9 +190,10 @@ east = STRUCT([east0, east1, east2, east3, east4]);
 
 //west wall
 //west ground floor
-//west0a = GRID([[9],[0.25],[2]]);
-//west1b = GRID([[6.25, -2.50, 2.50],[0.25],[-0.8, pillar1e2Height-0.7-0.30]]);
-//west0 = STRUCT([west0a, west0b]);
+west0a = GRID([[-2.45, 6.05],[-2.15, 0.25],[0.8]]);
+west0b = GRID([[-2.45, -0.25, -0.95, 1.8,-2.50],[-2.15, 0.25],[-0.8, pillar0Height-0.8]]);
+west0inizioArco = GRID([[-2.45, -5.80, 0.75],[-3.95, 0.25],[pillar0Height]]);
+west0 = STRUCT([west0a, west0b, west0inizioArco]);
 //west first floor
 west1a = GRID([[floorLenght],[0.25],[0.8]]);
 west1b = GRID([[5.75, -2.50, 2.75],[0.25],[-0.8, pillar1e2Height-0.8-floorDepth]]);
@@ -206,13 +207,30 @@ west3b = GRID([[-6, -2.50, 2.50],[0.25],[-0.8, pillar3Height-0.8-floorDepth]]);
 west3 = T([2,3])([-0.001,pillar0Height+pillar1e2Height+pillar1e2Height+floorDepth])(STRUCT([west3a, west3b]));
 //west fourth floor
 west4 = T([2,3])([-0.001,pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(GRID([[-5.50, 5.75],[0.1],[0.4]]));
+west4a = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(GRID([[5.50],[-(pillarDiameter+pillarYdistance+pillarRadius), 0.1],[0.4]]));
 //west wall composition
-west = STRUCT([west1, west2, west3, west4]);
+west = STRUCT([west0, west1, west2, west3, west4, west4a]);
+
+//south wall
+//ground floor walls
+south0a = GRID([[-2.45, 0.25],[-1.65, 3.85],[0.8]]);
+south0b = GRID([[-2.45, 0.25],[-1.65, 0.75, -2.85, 0.25],[-0.8, pillar0Height-0.8]]);
+south0a2 = GRID([[-2.45, -0.25, -0.95, 0.25],[-1.65, 0.75],[pillar0Height]]);
+south0a3 = GRID([[-2.45, -0.25, -0.95, -0.25, -4.35, 0.25],[-2.15, 1.0],[pillar0Height]]);
+south0 = STRUCT([south0a, south0a2, south0a3, south0b]);
+
+south4a = GRID([[-5.50, 0.1],[-0.099, floorWidth-1.325],[0.4]]);
+south4b = GRID([[0.1],[-5.375, 1.325],[0.4]]);
+south4 = T([3])([pillar0Height+pillar1e2Height+pillar1e2Height+pillar3Height+floorDepth])(STRUCT([south4a, south4b]));
+
+//south wall composition
+//south = STRUCT([south0, south1, south2, south3, south4]);
+south = STRUCT([south0, south4]);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                         VERTICALS - end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west]);
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south]);
 
 VIEW(building)

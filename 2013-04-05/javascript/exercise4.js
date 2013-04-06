@@ -249,6 +249,6 @@ windowsFrames = STRUCT([windowBig, windowBig2, planeFrame]);
 //                         WINDOWS - end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, windowBig]);
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, windowsFrames]);
 
 VIEW(building)

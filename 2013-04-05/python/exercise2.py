@@ -59,10 +59,14 @@ pillars3 = STRUCT([pillars3a, pillars3b]);
 #                         FLOORS - begin
 #####################################################################
 
+groundFloorDepth = 0.10;
 floorDepth = 0.20;
 floorWidth = 6.70;
 floorLenght = 11.25;
 floorFull = GRID([[floorLenght],[floorWidth],[floorDepth]]);
+
+#ground floor
+floors0 = GRID([[floorLenght],[floorWidth],[groundFloorDepth]]);
 
 #first floor
 balconyBase = GRID([[1.20],[1.20],[floorDepth]])
@@ -75,17 +79,15 @@ floors2b = GRID([[-5.50,5.75],[6.70],[floorDepth]]);
 triangularBalcony2_point = [[0,0],[1.25,0],[1.25,5.25],[0,5.25]];
 triangularBalcony2_cells = [[3,4,5]];
 triangularBalcony2d = MKPOL([triangularBalcony2_point, triangularBalcony2_cells, None]);
-floors2c = T([1,2])([5.50,0.2])(R([1,3])(PI)(PROD([triangularBalcony2d, Q(-floorDepth)])));
+floors2c = T([1])([5.50])(R([1,3])(PI)(PROD([triangularBalcony2d, Q(-floorDepth)])));
 floors2 = T([3])([pillar0Height + pillar1e2Height])(STRUCT([floors2a, floors2b, floors2c]));
 
 #third floor
 floors3 = T([3])([pillar0Height + 2*pillar1e2Height])(floorFull);
 
-#soffitto
+#third floor ceiling
 floors4a = GRID([[5.50],[-5.375, 1.325],[floorDepth]]);
 floors4 = T([3])([pillar0Height + 2*pillar1e2Height + pillar3Height])(STRUCT([floors4a, floors2b]));
-
-floors0 = floors3;
 
 #####################################################################
 #                         FLOORS - end

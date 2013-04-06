@@ -125,10 +125,14 @@ pillars3 = STRUCT([pillars3a, pillars3b]);
 //                         FLOORS - begin
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+groundFloorDepth = 0.10;
 floorDepth = 0.20;
 floorWidth = 6.70;
 floorLenght = 11.25;
 floorFull = GRID([[floorLenght],[floorWidth],[floorDepth]]);
+
+//ground floor
+floors0 = GRID([[floorLenght],[floorWidth],[groundFloorDepth]]);
 
 //first floor
 balconyBase = GRID([[1.20],[1.20],[floorDepth]])
@@ -147,11 +151,9 @@ floors2 = T([3])([pillar0Height + pillar1e2Height])(STRUCT([floors2a, floors2b, 
 //third floor
 floors3 = T([3])([pillar0Height + 2*pillar1e2Height])(floorFull);
 
-//soffitto
+//third floor ceiling
 floors4a = GRID([[5.50],[-5.375, 1.325],[floorDepth]]);
 floors4 = T([3])([pillar0Height + 2*pillar1e2Height + pillar3Height])(STRUCT([floors4a, floors2b]));
-
-floors0 = floors3;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                         FLOORS - end

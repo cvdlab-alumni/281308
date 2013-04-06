@@ -97,8 +97,8 @@ floors4 = T([3])([pillar0Height + 2*pillar1e2Height + pillar3Height])(STRUCT([fl
 #                         VERTICALS - begin
 #####################################################################
 
-#north = ;
-#south = ;
+#north wall;
+
 
 #east wall
 #east ground floor

@@ -46,6 +46,9 @@ S2 = S1;
 S1 = S0;
 
 GRID = SIMPLEX_GRID;
+NN = REPLICA;
+VIEW = DRAW;
+
 //cilindro non pieno, preferito per alleggerire il carico computazionale
 CYLINDER = CYL_SURFACE;
 //cilindro pieno
@@ -63,15 +66,12 @@ CYLINDER = CYL_SURFACE;
     return EXTRUDE([h])(circle)
   }
 }*/
-NN = REPLICA;
-
-VIEW = DRAW;
-
 
 RED = [1,0,0,1];
 GREEN = [0,1,0,1];
 BLACK = [0,0,0,1];
 
+//dimensioni pilastri
 pillarDiameter = 0.25;
 pillarRadius = 0.125;
 
@@ -85,7 +85,7 @@ circularPillar0 = T([1,2])([pillarRadius,pillarRadius])(COLOR(RED)(CYLINDER([pil
 circularPillar1 = T([1,2,3])([pillarRadius, pillarRadius, pillar0Height])(COLOR(RED)(CYLINDER([pillarRadius, pillar1e2Height])(24)));
 
 pillarXdistance = 2.50;
-pillarYdistance = 5.50;
+pillarYdistance = 5.00;
 
 //pilastri piano terra interni
 pillars0a = COLOR(BLACK)(GRID([[-pillarDiameter, -pillarXdistance, pillarDiameter, -pillarXdistance, pillarDiameter, -pillarXdistance, pillarDiameter],[-pillarDiameter, -pillarYdistance, pillarDiameter],[pillar0Height]]));

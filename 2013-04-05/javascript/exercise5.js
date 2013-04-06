@@ -1,6 +1,6 @@
-// Exercise 2 - Python
-// Define plan by plan, with names floor0, floor1, floor2, floor3, and floor4,
-// the 5 models of horizontal partitions, and add them to the STRUCT of the building model.
+// Exercise 5 - Javascript
+// Define with names stair1, stair2, and stair3 (from bottom up to top), 
+// and insert within the building model, the 3 stair models of the building.
 
 // adapt pyplasm code to plasm.js code
 
@@ -251,15 +251,14 @@ step3d1 = MAP([S1,S3,S2])(step2d_extruded1);
 ramp0 = STRUCT(NN(13)([step3d,T([1,3])([step_depth,step_raiser0])]));
 ramp1 = STRUCT(NN(13)([step3d1,T([1,3])([step_depth,step_raiser1])]));
 
-stairs0 = T([1,2])([pillarXdistance, pillarDiameter+pillarYdistance])(ramp0);
-stairs1 = T([1,2,3])([1.0, pillarDiameter+pillarYdistance, pillar0Height])(ramp1);
-stairs2 = T([1,2,3])([2*pillarXdistance+2*pillarDiameter, pillarDiameter+pillarYdistance, pillar0Height+pillar1e2Height])(ramp1);
-
+stairs1 = T([1,2])([pillarXdistance, pillarDiameter+pillarYdistance])(ramp0);
+stairs2 = T([1,2,3])([1.0, pillarDiameter+pillarYdistance, pillar0Height])(ramp1);
+stairs3 = T([1,2,3])([2*pillarXdistance+2*pillarDiameter, pillarDiameter+pillarYdistance, pillar0Height+pillar1e2Height])(ramp1);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                         STAIRS - end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, stairs0, stairs1, stairs2 ]);
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, stairs1, stairs2, stairs3]);
 
 VIEW(building)

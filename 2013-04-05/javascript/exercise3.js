@@ -244,12 +244,11 @@ function arc(alpha, r, R){
 arch1 = T([1,2])([2.45+0.73, 1.65])(R([1,2])(PI)(EXTRUDE([pillar0Height])(arc(PI,0.48,0.73))));
 arch2 = T([1,2])([2.45+5.80+0.75,4.70])(R([1,2])(3*PI/2)(EXTRUDE([pillar0Height])(arc(PI,1.75,2))));
 arches = STRUCT([arch1,arch2]);
-VIEW(arches);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                         VERTICALS - end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south]);
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, arches]);
 
 VIEW(building)

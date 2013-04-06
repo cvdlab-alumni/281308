@@ -178,6 +178,7 @@ windowBig = T([1,2,3])([0.25,0.25,pillar0Height+floorDepth])(R([1,2])(PI/2.0)(ST
 windowBig2 = T([1,2,3])([0.25,0.25,pillar0Height+pillar1e2Height+floorDepth])(R([1,2])(PI/2.0)(STRUCT([windowVframes, windowHframes])));
 
 windowsFrames = STRUCT([windowBig, windowBig2, planeFrame]);
+
 #####################################################################
 #                         WINDOWS - end
 #####################################################################

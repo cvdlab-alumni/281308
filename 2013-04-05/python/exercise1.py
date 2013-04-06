@@ -23,8 +23,8 @@ pillarYdistance = 5.50;
 pillars0a = COLOR(BLACK)(GRID([[-pillarDiameter, -pillarXdistance, pillarDiameter, -pillarXdistance, pillarDiameter, -pillarXdistance, pillarDiameter],[-pillarDiameter, -pillarYdistance, pillarDiameter],[pillar0Height]]));
 #pilastri piano terra circolari prima fila
 pillars0b = STRUCT(NN(5)([circularPillar0, T([1])([pillarDiameter + pillarXdistance])]));
-#pilastri piano terra circolari seconda fila
-pillars0c = T([2])([pillarDiameter + pillarYdistance])(circularPillar0);
+#pilastri piano terra circolari seconda fila (primo e ultimo)
+pillars0c = T([2])([pillarDiameter + pillarYdistance])(STRUCT(NN(2)([circularPillar0, T([1])([4*pillarDiameter + 4*pillarXdistance])])));
 #pilastri piano terra
 pillars0 = STRUCT([pillars0a, pillars0b, pillars0c]);
 

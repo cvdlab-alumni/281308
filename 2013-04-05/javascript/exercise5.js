@@ -235,7 +235,7 @@ south = STRUCT([south0, south4]);
 //                         STAIRS - begin
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-step_depth = 0.25;
+step_depth = floorDepth;
 step_raiser0 = pillar0Height/13.0;
 step_raiser1 = pillar1e2Height/13.0;
 

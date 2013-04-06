@@ -164,6 +164,25 @@ south = STRUCT([south0, south4]);
 #                         VERTICALS - end
 #####################################################################
 
-building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south]);
+#####################################################################
+#                         WINDOWS - begin
+#####################################################################
+
+windowVertFrame = COLOR(BLACK)(CUBOID([0.1,0.25,pillar1e2Height-0.25]));
+windowHorFrame = COLOR(BLACK)(CUBOID([5.0,0.25,0.1]));
+planeFrame = T([1,2,3])([0.25,0.25,pillar0Height+pillar1e2Height])(R([1,2])(PI/2.0)(CUBOID([5.0,0.25,floorDepth])));
+
+windowHframes = STRUCT(NN(3)([windowHorFrame ,T([3])([1.10])]));
+windowVframes = STRUCT(NN(5)([windowVertFrame ,T([1])([1.225])]));
+windowBig = T([1,2,3])([0.25,0.25,pillar0Height+floorDepth])(R([1,2])(PI/2.0)(STRUCT([windowVframes, windowHframes])));
+windowBig2 = T([1,2,3])([0.25,0.25,pillar0Height+pillar1e2Height+floorDepth])(R([1,2])(PI/2.0)(STRUCT([windowVframes, windowHframes])));
+
+windowsFrames = STRUCT([windowBig, windowBig2, planeFrame]);
+#####################################################################
+#                         WINDOWS - end
+#####################################################################
+
+
+building = STRUCT([pillars0, pillars1, pillars2, pillars3, floors0, floors1, floors2, floors3, floors4, east, west, south, windowsFrames]);
 
 VIEW(building)

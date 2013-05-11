@@ -49,8 +49,6 @@ hprofiloYZh = T([2])(-705)(SPLINE(CUBICUBSPLINE(domain))(pointsYZh));
 profiloYZhp = STRUCT([ T([1])(620)(R([1,3])(PI)(hprofiloYZh)), hprofiloYZh ])
 profiloYZh = T([1,2])([320,310])(R([1,2])(-PI/2.0)(R([2,3])(-PI/2.0)(profiloYZhp)))
 
-
-
 ########## End Exercise 2 ##########
 
 ########## Exercise 3 ##########
@@ -106,8 +104,7 @@ bolts = STRUCT ([
 	R([1,2])(PI*0.3)(bolt),R([1,2])(PI*0.2)(bolt),R([1,2])(PI*0.1)(bolt),
 	R([1,2])(-PI*0.9)(bolt),R([1,2])(-PI*0.8)(bolt),R([1,2])(-PI*0.7)(bolt),
 	R([1,2])(-PI*0.6)(bolt),R([1,2])(-PI*0.5)(bolt),R([1,2])(-PI*0.4)(bolt),
-	R([1,2])(-PI*0.3)(bolt),R([1,2])(-PI*0.2)(bolt),R([1,2])(-PI*0.1)(bolt)] )
-
+	R([1,2])(-PI*0.3)(bolt),R([1,2])(-PI*0.2)(bolt),R([1,2])(-PI*0.1)(bolt)])
 
 star = COLOR(GOLD)(T([3])([70])(S([1,2,3])([50,50,50])(STAR(5))));
 mozzo = T([3])([71])(STRUCT([
@@ -117,13 +114,13 @@ mozzo = T([3])([71])(STRUCT([
 	])  );
 
 wheelR = T([1,2,3])([190,-320,40])(S([1,2,3])([0.55,0.55,0.55])(
-		R([1,3])(-PI/2.0)(
+		R([1,2])(PI/2.0)(R([1,3])(-PI/2.0)(
 	STRUCT([
 	COLOR(GREY)(tyre),
 	rim1L, rim1R,
 	rim2L, rim2R,
 	COLOR(LIGHTGREY)(bolts),
-	star, mozzo]))))
+	star, mozzo])))))
 
 wheelL = T([1,2,3])([190,-320,40])(S([1,2,3])([0.55,0.55,0.55])(
 		R([1,2])(-PI/2.0)(R([1,3])(-PI/2.0)(
@@ -132,32 +129,18 @@ wheelL = T([1,2,3])([190,-320,40])(S([1,2,3])([0.55,0.55,0.55])(
 	rim1L, rim1R,
 	rim2L, rim2R,
 	COLOR(LIGHTGREY)(bolts),
-	star, mozzo]))))
+	star, mozzo])))))
 
-wheelR = T([1,2,3])([190,-320,40])(S([1,2,3])([0.55,0.55,0.55])(
-		R([1,3])(-PI/2.0)(
-	STRUCT([
-	COLOR(GREY)(tyre)
-	 ]))))
-
-wheelL = T([1,2,3])([190,-320,40])(S([1,2,3])([0.55,0.55,0.55])(
-		R([1,2])(-PI/2.0)(R([1,3])(-PI/2.0)(
-	STRUCT([
-	COLOR(GREY)(tyre)
-	 ])))))
-
-
-FRwheel = R([1,2])(PI/2.0)(wheel)
-Rwheel = R([1,3])(PI/2.0)(FRwheel)
+FRwheel = T([1,2])([130,500])(wheelR)
 RRwheel = T([1])([600])(S([1,2,3])([1.1,1.1,1.1])(FRwheel))
 
-FLwheel = T([2])([-450])(R([1,3])(PI)(FRwheel))
-RLwheel = T([2])([-450])(R([1,3])(PI)(RRwheel))
+FLwheel = T([1,2])([130,140])(wheelL)
+RLwheel = T([1])([600])(S([1,2,3])([1.1,1.1,1.1])(FLwheel))
 
 
 ########## End Exercise 3 ##########
 
 #car
 car = COLOR(RED)(STRUCT([latoXY, profiloXZ, profiloXZs, profiloYZf, profiloYZh]))
-VIEW(wheelL)
-VIEW(STRUCT ([car, FRwheel, FLwheel, wheelL, RRwheel, RLwheel]));
+
+VIEW(STRUCT ([car, FRwheel, FLwheel, RRwheel, RLwheel]));

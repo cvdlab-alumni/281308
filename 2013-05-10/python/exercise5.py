@@ -142,23 +142,6 @@ RLwheel = T([1])([600])(S([1,2,3])([1.1,1.1,1.1])(FLwheel))
 ########## End Exercise 3 ##########
 
 domain= GRID([10,10])
-#con bezier fa pena.
-#razza1 = BEZIER(S1)([[3.1, 2.5], [3.1, 5.5], [4.2, 4.2], [4.8, 4.6]])
-#razza1 = MAP(razza1)(domain)
-#razza2 = BEZIER(S1)([[2.65, 2.35], [3, 5.4], [1.7, 4.5], [1.2, 4.8]])
-#razza2 = MAP(razza2)(domain)
-#razza3 = BEZIER(S1)([[3.2, 5.2], [2.35, 5.4], [3.1, 4.8], [1.2, 5.1]])
-#razza3 = MAP(razza3)(domain)
-#razza4 = BEZIER(S1)([[2.8, 5.2], [3.5, 5.35], [3.1, 4.8], [4.7, 4.9]])
-#razza4 = MAP(razza4)(domain)
-#VIEW(STRUCT([razza1, razza2, razza3, razza4]))
-
-#così invece non posso fare la superfice
-#pointsRazze = [[310,705],[310,705],[310,705],[95,705],[95,705],[85,650],[85,650],[310,650],[310,650],[310,650]];
-#profiloRazze = T([2])(-705)(SPLINE(CUBICUBSPLINE(domain))(pointsRazze));
-#profiloYZf1 = STRUCT([ T([1])(620)(R([1,3])(PI)(profiloRazze)), profiloRazze ])
-
-#purtroppo sono le 18... :)
 
 steerTorus = COLOR(BLACK)(S([1,2,3])([1.57,1.57,1.57])(TORUS([27.5,33])([30,30])));
 
@@ -170,111 +153,28 @@ COLOR(GREY)(T([1,2])([-10,-50])(CUBOID([10,100,2]))),
 COLOR(GREY)(T([1,2])([0,-5])(CUBOID([50,10,2]))),
 ])
 
-
-
 steeringWheel = T([1,2,3])([500,-100,130])(R([1,3])(-PI/2.0)(STRUCT([razze, steerTorus])))
 
 #car
 car = COLOR(RED)(STRUCT([latoXY, profiloXZ, profiloXZs, profiloYZf, profiloYZh]))
-VIEW(STRUCT ([car, FRwheel, FLwheel, RRwheel, RLwheel, steeringWheel]));
 
 ########## End Exercise 2 ##########
 
 ########## Exercise 5 ##########
 
+wingDomain=MAP([S2,S1])(GRID([20,20]))
+wingBordo = BEZIER(S1)([[1,0,0],[0.6,0,230],[1,0,460]])
+wingSection = BEZIER(S2)([[0, 0], [100, 0], [100, 28], [0,0]])
 
-domain = GRID([25,25])
+wing = T([1,2,3])([1158,230,262])(
+	R([1,3])(PI)(R([2,3])(PI/2.0)(
+		MAP(PROFILEPRODSURFACE([wingBordo,wingSection]))(wingDomain)
+		)))
 
-Pu0 = [(0,0,0),(0,0,1),(1,0,1),(1,0,0)]
-Pu1 = [(0,1,0),(0,1,1),(1,1,1),(1,1,0)]
-P0v = [(0,0,0),(0,0,1),(0,1,1),(0,1,0)]
-P1v = [(1,0,0),(0,0,1),(1,1,1),(1,1,0)]
-Dom1D = INTERVALS(1)(24)
+########## End Exercise 5 ##########
 
-cu0 = MAP(BEZIER(S1)(Pu0))(Dom1D)
-cu1 = MAP(BEZIER(S1)(Pu1))(Dom1D)
-c0v = MAP(BEZIER(S1)(P0v))(Dom1D)
-c1v = MAP(BEZIER(S1)(P1v))(Dom1D)
+#completo con ruote
+VIEW(STRUCT ([car, FRwheel, FLwheel, RRwheel, RLwheel, steeringWheel, COLOR(RED)(wing)]));
 
-C0v = BEZIER(S1)([Pu0])
-C1v = BEZIER(S1)([Pu1])
-
-Cu0 = BEZIER(S1)([Pu0])
-Cu1 = BEZIER(S1)([Pu1])
-Cua = [[0,0,1],[0,0,2],[1,0,2],[1,0,1]]
-Cub = [[0,1,1],[0,1,2],[1,1,2],[1,1,1]]
-mapping = BEZIER(S2)([Cu0, Cua,  Cub, Cu1])
-
-tettinoWIP = MAP(mapping)(domain)
-
-
-Su0 = BEZIER(S1)([[0,0,0],[10,0,20],[5,0,20]])
-Su1 = BEZIER(S1)([[0,10,0],[10,10,20],[5,0,20]])
-S0v = BEZIER(S2)([[0,0,0],[0,0,3],[0,10,3],[0,10,0]])
-S1v = BEZIER(S2)([[0,0,0],[0,0,3],[0,10,3],[0,10,0]])
-VIEW(MAP(COONSPATCH([Su0,Su1,S0v,S1v]))(GRID([20,20])))
-
-domain = GRID([10,10])
-
-cu0 = BEZIER(S1)([[0,2,4],[1,2.5,4],[2,2.5,5],[3,2.5,4.5]])
-curve01 = MAP(cu0)(domain)
-cu1 = BEZIER(S1)([[0.69,5.2, 4.05], [0.9,5.2, 4.14], [1.72,5.2, 4.92], [3.19,5.2, 4.55]])
-curve02 = MAP(cu1)(domain)
-c0v = BEZIER(S2)([[3.19, 5.2,4.55], [1.67, 4.91,4.55], [1.99, 2.49,4.55], [3.22, 2.43,4.55]])
-curve03 = MAP(c0v)(domain)
-c1v = BEZIER(S2)([[0.69, 5.2,4.05], [0.17, 3.92,4.05], [0.6, 2.71,4.05], [0.66, 2.43,4.05]])
-curve04 = MAP(c1v)(domain)
-VIEW(STRUCT([curve01,curve02,curve03,curve04]))
-
-#s= BEZIER(S2)([cu0,cu1,c0v,c1v])
-surface = COONSPATCH([cu1,cu0,c1v,c0v])
-surf = MAP(surface)(domain)
-VIEW(COLOR(RED)(surf))
-
-#senza ruote
-#VIEW(STRUCT ([car, steeringWheel]));
-#completa di ruote
-#VIEW(STRUCT ([car, FRwheel, FLwheel, RRwheel, RLwheel, steeringWheel]));
- def translatePoints(values):
-x = values[0]
-y = values[1]
-z = values[2]
-def translatePoints0(points):
-p = []
-for a in points:
-c = [0,0,0]
-c[0] = a[0]+x
-c[1] = a[1]+y
-c[2] = a[2]+z
-p.append(c)
-return p
-return translatePoints0
-
-p0 = [[0,0,0],[0.5,0,0]]
-v0 = BEZIER(S1)(p0)
-p1 = translatePoints([0,6,2.5])([[0.5,0,0],[1,0,0]])
-v1 = BEZIER(S1)(p1)
-p2 = [[0,0,0],[0.2,2,0],[0.3,3.5,0],[0.5,6,2.5]]
-v2 = BEZIER(S2)(p2)
-p3 = translatePoints([0.5,0,0])(p2)
-v3 = BEZIER(S2)(p3)
-
-first = MAP(COONSPATCH([v0,v1,v2,v3]))(GRID([20,20]))
-
-p4 = [[1,0,0],[1.5,0,0]]
-v4 = BEZIER(S1)(p4)
-p5 = translatePoints([0,6,2.5])([[0.8,0,0],[1.3,0,0]])
-v5 = BEZIER(S1)(p5)
-p6 = [[1,0,0],[1.1,2,0],[1,3.5,0],[0.8,6,2.5]]
-v6 = BEZIER(S2)(p6)
-p7 = translatePoints([0.5,0,0])(p6)
-v7 = BEZIER(S2)(p7)
-
-second = MAP(COONSPATCH([v4,v5,v6,v7]))(GRID([20,20]))
-
-VIEW(STRUCT([
-MAP(v0)(GRID([10,10])),
-MAP(v1)(GRID([10,10])),
-MAP(v2)(GRID([10,10])),
-MAP(v3)(GRID([10,10])),
-first, second]))
+#Committato dopo la scadenza ma...una F40 senza alettone non è una F40 :)
+VIEW(STRUCT ([car, steeringWheel, COLOR(RED)(wing)]));

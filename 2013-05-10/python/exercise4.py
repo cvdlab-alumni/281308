@@ -161,7 +161,7 @@ domain= GRID([10,10])
 
 #purtroppo sono le 18... :)
 
-steerTorus = COLOR(BLACK)(S([1,2,3])([1.5,1.5,1.5])(TORUS([27.5,33])([30,30])));
+steerTorus = COLOR(BLACK)(S([1,2,3])([1.57,1.57,1.57])(TORUS([27.5,33])([30,30])));
 
 razze = STRUCT([
 COLOR(GREY)(T([3])([-0.1])(CYLINDER([17,2.1])(20))),

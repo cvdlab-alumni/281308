@@ -173,8 +173,95 @@ wing = T([1,2,3])([1158,230,262])(
 
 ########## End Exercise 5 ##########
 
-#completo con ruote
-VIEW(STRUCT ([car, FRwheel, FLwheel, RRwheel, RLwheel, steeringWheel, COLOR(RED)(wing)]));
+########## Cofano ##########
 
-#Committato dopo la scadenza ma...una F40 senza alettone non è una F40 :)
-VIEW(STRUCT ([car, steeringWheel, COLOR(RED)(wing)]));
+domain = GRID([30,30])
+
+#i nove valori numerici usati da tutti i punti
+x1 = 0
+x2 = 25
+x3 = 0
+y1 = 500
+y2 = 0
+y3 = 85
+z1 = 500
+z2 = 500
+w1 = 0
+
+#i quattro vertici della patch
+p1 = [x1,x2,x3]
+p2 = [y1,y2,y3]
+p3 = [z1,(z2-y2),y3]
+p4 = [w1,(z2-x2),x3]
+
+#manici delle curve dei profili presi direttamente dal blueprint:
+c4mp1 = [x1-110, x2+10, x3]
+c4mp4 = [w1-110, (z2-x2)-10, x3]
+c1mp1 = [x1+140,x2,x3+120]
+c3mp4 = [w1+140,(z2-x2),x3+120]
+c1mp2 = [y1-40,y2,y3+50]
+c3mp3 = [z1-40,(z2-y2),y3+50]
+c2mp2 = [y1-220, y2+100, y3+110]
+c2mp3 = [z1-220, (z2-x2)-100, y3+110]
+c1 = BEZIER(S1)([p2, c1mp2, c1mp1, p1])
+bcurve1 = MAP(c1)(domain)
+c2 = BEZIER(S2)([p3, c2mp3, c2mp2,  p2])
+bcurve2 = MAP(c2)(domain)
+c3 = BEZIER(S1)([p3, c3mp3, c3mp4, p4])
+bcurve3 = MAP(c3)(domain)
+c4 = BEZIER(S2)([p4, c4mp4, c4mp1, p1])
+bcurve4 = MAP(c4)(domain)
+
+# i manici della patch modificati per far combaciare l'approssimazione effettuata da COONSPATCH
+# alle curve prese dal blueprint.
+c4mp1 = [x1-110-60, x2+10+80, x3]
+c4mp4 = [w1-110-60, (z2-x2)-10-80, x3]
+c1mp1 = [x1+140+280,x2+40,x3+120+240]
+c3mp4 = [w1+140+280,(z2-x2)-40,x3+120+240]
+c1mp2 = [y1-80,y2,y3+100]
+c3mp3 = [z1-80,(z2-y2),y3+100]
+
+c2mp2 = [y1-220, y2+100, y3+110]
+c2mp3 = [z1-220, (z2-x2)-100, y3+110]
+
+c1 = BEZIER(S1)([p2, c1mp2, c1mp1, p1])
+curve1 = MAP(c1)(domain)
+
+c2 = BEZIER(S2)([p3, c2mp3, c2mp2,  p2])
+curve2 = MAP(c2)(domain)
+
+c3 = BEZIER(S1)([p3, c3mp3, c3mp4, p4])
+curve3 = MAP(c3)(domain)
+
+c4 = BEZIER(S2)([p4, c4mp4, c4mp1, p1])
+curve4 = MAP(c4)(domain)
+
+hoodPatch = COONSPATCH([c1,c3,c2,c4])
+#in posizione sulle curve
+#hood = T([2,3])([-500,-10])(S([1,3])([1/3.0,1/3.0])(MAP(hoodPatch)(domain)))
+
+#in posizione nell'auto
+hood = T([1,2,3])([80,-710,80])(
+	S([1,2,3])([0.70,0.95,0.70])(
+		S([1,3])([1/3.0,1/3.0])(MAP(hoodPatch)(domain))
+		)
+	)
+
+#VIEW(STRUCT([
+#	COLOR(RED)(curve1),
+#	COLOR(GREEN)(curve2),
+#	COLOR(BLUE)(curve3),
+#	curve4,
+#	COLOR(RED)(bcurve1),
+#	COLOR(GREEN)(bcurve2),
+#	COLOR(BLUE)(bcurve3),
+#	bcurve4,
+#	hood]))
+
+########## End Cofano ##########
+
+#completo con ruote
+#VIEW(STRUCT ([car, FRwheel, FLwheel, RRwheel, RLwheel, steeringWheel, COLOR(RED)(wing), COLOR(RED)(hood)]));
+
+#Con cofano
+VIEW(STRUCT ([car, steeringWheel, COLOR(RED)(wing), COLOR(RED)(hood)]));

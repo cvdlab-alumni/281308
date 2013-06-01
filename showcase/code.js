@@ -140,3 +140,19 @@ neck = function(){
 	return Sk(1/4.5)(T([0,1,2])([4.5,-1.15,4.5])(R([1,2])(-PI/2.0)(neckObj)));
 };
 DRAW(neck());
+
+baseBall = function(){
+
+};
+//DRAW(baseBall);
+
+arm = function(){
+	var armDom = PROD1x1([INTERVALS(1)(40),INTERVALS(1)(6)]);
+	var h = 40;
+	var armNcpVector = [0,0,h];
+	var armProfile = BEZIER(S0)([[0,0,0],[1,0,0],[1,0,0],[1,0,0],[1,0,0], [3,2,0],[3,2,0],[3,2,0],[3,2,0],[3,2,0],[3,2,0], [1,3,0],[1,3,0],[1,3,0], [0,3,0]]);
+	var armHalf = MAP(CYLINDRICAL_SURFACE(armProfile)(armNcpVector))(armDom);
+	var armObj = STRUCT([armHalf, T([2])([h])(R([0,2])(PI)(armHalf))]);
+	return COLOR(WHITE)(T([0,1,2])([-1,0.75,SQRT(2)])(R([1,2])(PI/2.0)(R([0,2])(PI/2.0)(Sk(0.1)(armObj)))));
+};
+DRAW(arm());

@@ -24,6 +24,18 @@ var SPHERE = function (arg){
 	return [u,v,w];
 };
 
+//toro
+var TORUS = function (R,r){
+	return function (arg){
+		var a = arg[0];
+		var b = arg[1];
+		var u = (r*COS(a)+R) * COS(b);
+		var v = (r*COS(a)+R) * SIN(b);
+		var w = r*SIN(a);
+		return [u,v,w];
+	};
+};
+
 //settori dei domini 
 var sect = 36;
 var framesect = 12;
@@ -98,7 +110,7 @@ cockpit = function(){
 	// var cockpitFrames = COLOR([1,1,1,1])(STRUCT([cockpitDoorFrame, cockpitClosedDoorFrame]));
 
 	// var IncockpitDoorFrameDom = DOMAIN([[(3*PI-0.1)/4.0,(3*PI+0.5)/4.0],[0,2*PI]])([framesect,sect]);
-	// var IncockpitDoorFrame = T([0,1,2])([-0.3,0,-PI/4.5])(R([0,2])(-PI/4.0)(MAP(SPHERE)(IncockpitDoorFrameDom)));
+	// var IncockpitDoorFrame = MAP(SPHERE)(IncockpitDoorFrameDom);
 
 	// var IncockpitClosedDoorFrameDom = DOMAIN([[(PI-0.5)/4.0, (PI+0.1)/4.0],[0,2*PI]])([framesect,sect]);
 	// var IncockpitClosedDoorFrame = MAP(SPHERE)(IncockpitClosedDoorFrameDom);
@@ -124,7 +136,7 @@ cockpit = function(){
 
 	// var allCockpitFrames = STRUCT([cockpitFrames, IncockpitFrames]);
 
-//	var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass, allCockpitFrames]))));
+	// var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass, allCockpitFrames]))));
 	var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass]))));
 
 	return cockpitObj;
@@ -148,11 +160,115 @@ baseBall = function(){
 
 arm = function(){
 	var armDom = PROD1x1([INTERVALS(1)(40),INTERVALS(1)(6)]);
-	var h = 40;
+	var h = 35;
 	var armNcpVector = [0,0,h];
 	var armProfile = BEZIER(S0)([[0,0,0],[1,0,0],[1,0,0],[1,0,0],[1,0,0], [3,2,0],[3,2,0],[3,2,0],[3,2,0],[3,2,0],[3,2,0], [1,3,0],[1,3,0],[1,3,0], [0,3,0]]);
 	var armHalf = MAP(CYLINDRICAL_SURFACE(armProfile)(armNcpVector))(armDom);
 	var armObj = STRUCT([armHalf, T([2])([h])(R([0,2])(PI)(armHalf))]);
-	return COLOR(WHITE)(T([0,1,2])([-1,0.75,SQRT(2)])(R([1,2])(PI/2.0)(R([0,2])(PI/2.0)(Sk(0.1)(armObj)))));
+	return COLOR(WHITE)(T([0,1,2])([-0.75,0.75,SQRT(2)])(R([1,2])(PI/2.0)(R([0,2])(PI/2.0)(Sk(0.1)(armObj)))));
 };
 DRAW(arm());
+
+engines = function(){
+	//var innerEngineDom = DOMAIN([[0,PI],[0,PI]])([2*sect,sect]);
+	//var innerEngine = T([2])([0.641])(S([0,1,2])([0.6,0.6,0.40])(R([1,2])(PI/2.0)(MAP(SPHERE)(innerEngineDom))));
+
+	 var engineMainDom = DOMAIN([[0.8,2.1],[0,2*PI]])([2*sect,sect]);
+	 var engineMain = MAP(SPHERE)(engineMainDom);
+
+	// var flapDom = DOMAIN([[2.7,PI],[0,PI-0.5]])([framesect,doorsect]);
+	// var flap =  R([1,2])(-PI/3.3)(R([1,2])(PI)(MAP(SPHERE)(flapDom)) );
+	// var flaps = STRUCT( REPLICA(6)([R([0,1])([PI/3.0]), flap]));
+
+	// var innerDisk = COLOR(BLACK)(T([2])([0.6])(DISK(0.8)([10,1])));
+	// var innerBlueDisk = COLOR(BLACK)(T([2])([-0.4])(DISK(0.9)([10,1])));
+
+	// var centralSeamDom = DOMAIN([[(PI-0.02)/2.0,(PI+0.02)/2.0],[0,2*PI]])([1,sect]);
+	// var centralSeam =  Sk(1.001)(MAP(SPHERE)(centralSeamDom));
+
+	// var exhaustChromeDom = DOMAIN([[2.1,2.2],[0,2*PI]])([1,sect]);
+	// var exhaustChrome = MAP(SPHERE)(exhaustChromeDom);
+
+	// var blueBeamDom = DOMAIN([[2.19,2.5],[0,2*PI]])([6,sect]);
+	// var blueBeam = COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeamDom));
+	// var blueBeam2Dom = DOMAIN([[1,PI-0.75],[0,2*PI]])([1,sect]);
+	// var blueBeam2 = T([2])([-0.1])( Sk(0.99)(COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeam2Dom))));
+	// blueBeam = Sk(0.995)(STRUCT([blueBeam, blueBeam2]));
+
+	// var exhaustShieldDom = DOMAIN([[2.53,PI],[0,2*PI]])([doorsect,sect]);
+	// var exhaustShield = MAP(SPHERE)(exhaustShieldDom);
+
+	// var exhaustHoleDom = DOMAIN([[PI-0.025,PI],[0,2*PI]])([1,12]);
+	// var exhaustHole = COLOR(BLACK)(T([2])([-0.001])(R([0,2])([-0.45])(MAP(SPHERE)(exhaustHoleDom))));
+	// var exhaustHole8 = R([1,2])([0.14])(STRUCT(REPLICA(8)([R([0,2])([0.09]), exhaustHole])));
+	// var exhaustHole9line = R([1,2])([0.07])(R([0,2])([-0.045])(STRUCT(REPLICA(9)([R([0,2])([0.09]), exhaustHole]))));
+	// var exhaustHole9 = STRUCT(REPLICA(5)([R([1,2])([0.14]), exhaustHole9line]));
+	// var exhaustHole10line = R([1,2])([0.14])(R([0,2])([-0.09])(STRUCT(REPLICA(10)([R([0,2])([0.09]), exhaustHole]))));
+	// var exhaustHole10 = STRUCT(REPLICA(4)([R([1,2])([0.14]), exhaustHole10line]));
+	// var exhaustHole8b = R([1,2])([0.7])(exhaustHole8);
+	// var exhaustHoles = R([0,2])([0.045])(R([1,2])([-0.07*7])(STRUCT([exhaustHole8, exhaustHole9, exhaustHole10,  exhaustHole8b])));
+
+	// var exhaustFlapDom = DOMAIN([ [2.2,PI-0.75 ], [2,2.5]])([6,6]);
+	// var exhaustFlap = COLOR([0.5,0.5,0.5,1])(MAP(SPHERE)(exhaustFlapDom));
+	// var exhaustFlaps = R([0,1])(PI)(STRUCT( REPLICA(12)([R([0,1])([PI/6.0]), exhaustFlap])));
+
+	// var exhaustBodyDom = DOMAIN([[0,1],[0,2*PI]])([2*sect,sect]);
+	// var exhaustBodyProfile = BEZIER(S0)([ [2.8,2.8,0],[2.8,2.8,0],[2.8,2.8,0],   [3,3,0],[3,3,0],[3,3,0],
+	// 	[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],
+	// 	[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],
+	// 	[3.3,3.3,2],[3.3,3.3,2],[3.3,3.3,2] ]);
+	// var exhaustBodyMap = ROTATIONAL_SURFACE(exhaustBodyProfile);
+	// var exhaustBody = Sk(1/5)(T([2])([-4.1])(MAP(exhaustBodyMap)(exhaustBodyDom) ));
+
+//	whiteEngine = COLOR([1.5,1.5,1.5,1])(STRUCT([engineMain, innerEngine, flaps]));
+//	var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine, innerDisk, innerBlueDisk, centralSeam, exhaustChrome, exhaustHoles, exhaustShield, exhaustBody, exhaustFlaps, blueBeam, exhaustHoles])));
+
+	var whiteEngine = COLOR([1.5,1.5,1.5,1])(STRUCT([engineMain ]));
+	var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine])));
+	return Sk(0.8)(STRUCT([engine1, T([0])([6])(engine1)]));
+};
+DRAW(engines());
+
+tail = function(){
+	var tailDom = PROD1x1([INTERVALS(1)(40),INTERVALS(1)(6)]);
+	var h = 28;
+	var tailNcpVector = [0,0,h];
+	var tailProfile = BEZIER(S0)([[0,-1,0],[0.3,-1,0],[0.3,-1,0],[0.3,-1,0],[0.3,-1,0], [3,2,0],[3,2,0],[3,2,0],[3,2,0],[3,2,0],[3,2,0], [1,3,0],[1,3,0],[1,3,0], [0,3,0]]);
+	var tailHalf = MAP(CYLINDRICAL_SURFACE(tailProfile)(tailNcpVector))(tailDom);
+	var tailObj = STRUCT([tailHalf, T([2])([h])(R([0,2])(PI)(tailHalf))]);
+	return COLOR(WHITE)(T([0,1,2])([1,2,1.4])(R([1,2])(-PI/2.0)(R([0,1])(-PI)(Sk(0.1)(tailObj)))));
+};
+DRAW(tail());
+
+tailRotor = function(){
+	var tailRotorExtDom = DOMAIN([[-1, 1],[0,2*PI]])([framesect,sect]);
+	var tailRotorExt = COLOR(WHITE)(Sk(0.844)(MAP(TORUS(3,1))(tailRotorExtDom)));
+
+	var tailRotorInnDom = DOMAIN([[0,1],[0,2*PI]])([2*12,24]);
+	var tailRotorInnProfile = BEZIER(S0)([ [2.2,0,0.1],[2.2,0,0.1],[2.2,0,0.3],[2.2,0,0.3],[2.2,0,0.3], [2.5,0,0.3], [3,0,0.7]]);
+	var tailRotorInnMap = ROTATIONAL_SURFACE(tailRotorInnProfile);
+	var tailRotorInnObj = MAP(tailRotorInnMap)(tailRotorInnDom);
+	var tailRotorInnBandProfile = BEZIER(S0)([ [2.2,0,-0.1],[2.2,0,0.1] ]);
+	var tailRotorInnBandMap = ROTATIONAL_SURFACE(tailRotorInnBandProfile);
+	var tailRotorInnBandObj = COLOR(BLACK)(MAP(tailRotorInnBandMap)(tailRotorInnDom));
+
+	var tailRotorCenterDom = DOMAIN([[0,1],[0,2*PI]])([2*12,24]);
+	var tailRotorCenterProfile = BEZIER(S0)([ [1.3,0,0.1],[1.3,0,0.1],[1.3,0,0.3],[1.3,0,0.3], [0.3,0,0.5],[0.3,0,0.5],[0.3,0,0.5], [0,0,1.5]]);
+	var tailRotorCenterMap = ROTATIONAL_SURFACE(tailRotorCenterProfile);
+	var tailRotorCenterObj = COLOR(WHITE)(MAP(tailRotorCenterMap)(tailRotorCenterDom));
+
+	var tailBlade1 = COLOR(WHITE)(T([0,1,2])([-5,-0.5,-0.1])(CUBOID([10,1,0.2])));
+	var tailBladeBand1 = T([0,1,2])([-4.3,-0.5,-0.101])(CUBOID([0.2,1.01,0.202]));
+	var tailBladeBand2 = T([0,1,2])([4,-0.5,-0.101])(CUBOID([0.2,1.01,0.202]));
+	var tailBladeBand1in = T([0,1,2])([-1.43,-0.5,-0.101])(CUBOID([0.2,1.01,0.202]));
+	var tailBladeBand2in = T([0,1,2])([1.3,-0.5,-0.101])(CUBOID([0.2,1.01,0.202]));
+	var tailBlade = STRUCT([tailBlade1, tailBladeBand1, tailBladeBand2, tailBladeBand1in, tailBladeBand2in ]);
+
+	var centralDiskBandProfile = BEZIER(S0)([ [1.401,0,-0.1],[1.401,0,0.1] ]);
+	var centralDiskBandMap = ROTATIONAL_SURFACE(centralDiskBandProfile);
+	var centralDiskBandObj = MAP(centralDiskBandMap)(tailRotorInnDom);
+	var centralDisk = STRUCT([centralDiskBandObj, T([2])([-0.101])(DISK(1.4)([sect,1])) , T([2])([0.101])(DISK(1.4)([sect,1])) ]);
+	
+	return T([0,1,2])([1,5.4,1.5])(R([0,2])(PI/2.0)(Sk(0.2)(STRUCT([centralDisk, tailBlade, tailRotorExt, tailRotorCenterObj, R([0,2])(PI)(tailRotorCenterObj), tailRotorInnObj, R([0,2])(PI)(tailRotorInnObj), tailRotorInnBandObj]))));
+};
+DRAW(tailRotor());

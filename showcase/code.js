@@ -100,10 +100,10 @@ cockpit = function(){
 	var cockpitGlass = COLOR255([160,210,255,0.5])(STRUCT([cockpitBubble, cockpitDoor]));
 
 	// //Frame
-	var cockpitDoorFrameDom = DOMAIN([[3*PI/4.0,(3*PI+0.4)/4.0],[0,2*PI]])([framesect,sect]);
+	var cockpitDoorFrameDom = DOMAIN([[3*PI/4.0,(3*PI+0.4)/4.0],[0,2*PI]])([framesect,2*sect]);
 	var cockpitDoorFrame = T([0,1,2])([-0.3,0,-PI/4.5])(R([0,2])(-PI/4.0)(MAP(SPHERE)(cockpitDoorFrameDom)));
 
-	var cockpitClosedDoorFrameDom = DOMAIN([[(PI-0.4)/4.0, PI/4.0],[0,2*PI]])([framesect,sect]);
+	var cockpitClosedDoorFrameDom = DOMAIN([[(PI-0.4)/4.0, PI/4.0],[0,2*PI]])([framesect,2*sect]);
 	var cockpitClosedDoorFrame = MAP(SPHERE)(cockpitClosedDoorFrameDom);
 
 	var cockpitFrames = COLOR([1,1,1,1])(STRUCT([cockpitDoorFrame, cockpitClosedDoorFrame]));

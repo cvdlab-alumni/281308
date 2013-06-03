@@ -54,31 +54,31 @@ universe = function(){
 	var universe = Sk(10000)(MAP(SPHERE)(universeDom));
 	return COLOR(BLACK)(universe);
 };
-//DRAW(universe());
+DRAW(universe());
 
 earth = function(){
 	var earthDom = DOMAIN([[0,PI/2.0],[0,2*PI]])([72,172]);
 	var earth = T([2])([-12000])(Sk(10000)(MAP(SPHERE)(earthDom)));
 	return COLOR255([10,110,200,1])(earth);
 };
-//DRAW(earth());
+DRAW(earth());
 
 atmosphere = function(){
 	var atmosphereDom = DOMAIN([[0,PI/2.0],[0,2*PI]])([72,172]);
 	var atmosphere = T([2])([-12000])(Sk(11000)(MAP(SPHERE)(atmosphereDom)));
 	return COLOR255([200, 240, 255,0.65])(atmosphere);
 };
-//DRAW(atmosphere());
+DRAW(atmosphere());
 
 
-//Bubbleship
+//****Bubbleship****//
 
 tetrahedralCore = function(){
 
-var p1 = [1,0,0];
-var p2 = [2.5,0,SQRT(2.5)];
-var p3 = [-0.5,0,SQRT(2.5)];
-var p4 = [1,SQRT(3),SQRT(2.5)];
+	var p1 = [1,0,0];
+	var p2 = [2.5,0,SQRT(2.5)];
+	var p3 = [-0.5,0,SQRT(2.5)];
+	var p4 = [1,SQRT(3),SQRT(2.5)];
 
 	var core_faceX =  TRIANGLE_DOMAIN(1, [p1, p2, p3]);
 	var core_faceYL = TRIANGLE_DOMAIN(1, [p1, p4, p2]);
@@ -92,7 +92,7 @@ DRAW(tetrahedralCore());
 cockpit = function(){
 
 	//Glass
-	var cockpitBubbleDom = DOMAIN([[0,3*PI/4.0],[0,2*PI]])([2*sect,sect]);
+	var cockpitBubbleDom = DOMAIN([[0,3*PI/4.0],[0,2*PI]])([sect,2*sect]);
 	var cockpitBubble = MAP(SPHERE)(cockpitBubbleDom);
 
 	var cockpitDoorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
@@ -100,44 +100,44 @@ cockpit = function(){
 
 	var cockpitGlass = COLOR255([160,210,255,0.5])(STRUCT([cockpitBubble, cockpitDoor]));
 
-	//Frame
-	// var cockpitDoorFrameDom = DOMAIN([[3*PI/4.0,(3*PI+0.4)/4.0],[0,2*PI]])([framesect,sect]);
-	// var cockpitDoorFrame = T([0,1,2])([-0.3,0,-PI/4.5])(R([0,2])(-PI/4.0)(MAP(SPHERE)(cockpitDoorFrameDom)));
+	// //Frame
+	var cockpitDoorFrameDom = DOMAIN([[3*PI/4.0,(3*PI+0.4)/4.0],[0,2*PI]])([framesect,sect]);
+	var cockpitDoorFrame = T([0,1,2])([-0.3,0,-PI/4.5])(R([0,2])(-PI/4.0)(MAP(SPHERE)(cockpitDoorFrameDom)));
 
-	// var cockpitClosedDoorFrameDom = DOMAIN([[(PI-0.4)/4.0, PI/4.0],[0,2*PI]])([framesect,sect]);
-	// var cockpitClosedDoorFrame = MAP(SPHERE)(cockpitClosedDoorFrameDom);
+	var cockpitClosedDoorFrameDom = DOMAIN([[(PI-0.4)/4.0, PI/4.0],[0,2*PI]])([framesect,sect]);
+	var cockpitClosedDoorFrame = MAP(SPHERE)(cockpitClosedDoorFrameDom);
 
-	// var cockpitFrames = COLOR([1,1,1,1])(STRUCT([cockpitDoorFrame, cockpitClosedDoorFrame]));
+	var cockpitFrames = COLOR([1,1,1,1])(STRUCT([cockpitDoorFrame, cockpitClosedDoorFrame]));
 
-	// var IncockpitDoorFrameDom = DOMAIN([[(3*PI-0.1)/4.0,(3*PI+0.5)/4.0],[0,2*PI]])([framesect,sect]);
-	// var IncockpitDoorFrame = MAP(SPHERE)(IncockpitDoorFrameDom);
+	var IncockpitDoorFrameDom = DOMAIN([[(3*PI-0.1)/4.0,(3*PI+0.5)/4.0],[0,2*PI]])([framesect,sect]);
+	var IncockpitDoorFrame = MAP(SPHERE)(IncockpitDoorFrameDom);
 
-	// var IncockpitClosedDoorFrameDom = DOMAIN([[(PI-0.5)/4.0, (PI+0.1)/4.0],[0,2*PI]])([framesect,sect]);
-	// var IncockpitClosedDoorFrame = MAP(SPHERE)(IncockpitClosedDoorFrameDom);
+	var IncockpitClosedDoorFrameDom = DOMAIN([[(PI-0.5)/4.0, (PI+0.1)/4.0],[0,2*PI]])([framesect,sect]);
+	var IncockpitClosedDoorFrame = MAP(SPHERE)(IncockpitClosedDoorFrameDom);
 
-	// var IncockpitBackDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
-	// var IncockpitBack = R([0,2])(-PI/2.0)(MAP(SPHERE)(IncockpitBackDom));
+	var IncockpitBackDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
+	var IncockpitBack = R([0,2])(-PI/2.0)(MAP(SPHERE)(IncockpitBackDom));
 
-	// var IncockpitFloorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
-	// var IncockpitFloor = R([1,2])(-PI/2.0)(MAP(SPHERE)(IncockpitFloorDom));
+	var IncockpitFloorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
+	var IncockpitFloor = R([1,2])(-PI/2.0)(MAP(SPHERE)(IncockpitFloorDom));
 
-	// var IncockpitUpDom = DOMAIN([[(PI-0.25)/2.0,(PI+0.25)/2.0],[PI/4,3*PI/4.0]])([framesect,sect]);
-	// var IncockpitUp = R([0,2])(-PI/2.0)(MAP(SPHERE)(IncockpitUpDom));
+	var IncockpitUpDom = DOMAIN([[(PI-0.25)/2.0,(PI+0.25)/2.0],[PI/4,3*PI/4.0]])([framesect,sect]);
+	var IncockpitUp = R([0,2])(-PI/2.0)(MAP(SPHERE)(IncockpitUpDom));
 
-	// var IncockpitUpBackDom = DOMAIN([[(PI-0.5)/2.0,(PI+0.5)/2.0],[0,PI]])([framesect,sect]);
-	// var IncockpitUpBack = R([0,1])(-PI/2.0)(MAP(SPHERE)(IncockpitUpBackDom));
+	var IncockpitUpBackDom = DOMAIN([[(PI-0.5)/2.0,(PI+0.5)/2.0],[0,PI]])([framesect,sect]);
+	var IncockpitUpBack = R([0,1])(-PI/2.0)(MAP(SPHERE)(IncockpitUpBackDom));
 
-	// var IncockpitCircleUpDom = DOMAIN([[(PI-0.4),PI],[0,2*PI]])([framesect,sect]);
-	// var IncockpitCircleUp = R([1,2])(PI/2.0)(MAP(SPHERE)(IncockpitCircleUpDom));
+	var IncockpitCircleUpDom = DOMAIN([[(PI-0.4),PI],[0,2*PI]])([framesect,sect]);
+	var IncockpitCircleUp = R([1,2])(PI/2.0)(MAP(SPHERE)(IncockpitCircleUpDom));
 
-	// var IncockpitTop = STRUCT([IncockpitUp, IncockpitUpBack, IncockpitCircleUp]);
+	var IncockpitTop = STRUCT([IncockpitUp, IncockpitUpBack, IncockpitCircleUp]);
 
-	// var IncockpitFrames = COLOR(BLACK)(Sk(0.999)(STRUCT([IncockpitDoorFrame, IncockpitClosedDoorFrame, IncockpitBack, IncockpitFloor, IncockpitTop])));
+	var IncockpitFrames = COLOR(BLACK)(Sk(0.999)(STRUCT([IncockpitDoorFrame, IncockpitClosedDoorFrame, IncockpitBack, IncockpitFloor, IncockpitTop])));
 
-	// var allCockpitFrames = STRUCT([cockpitFrames, IncockpitFrames]);
+	var allCockpitFrames = STRUCT([cockpitFrames, IncockpitFrames]);
 
-	// var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass, allCockpitFrames]))));
-	var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass]))));
+	var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass, allCockpitFrames]))));
+	//var cockpitObj = T([0,1,2])([1,-1,1])(R([0,2])(PI/2.0)(R([0,1])(PI/2.0)(STRUCT([cockpitGlass]))));
 
 	return cockpitObj;
 };
@@ -153,9 +153,26 @@ neck = function(){
 };
 DRAW(neck());
 
-baseBall = function(){
+//Neck cover
+neckCover = function(){
+	var p1 = [1,0,0];
+	var p2 = [2.5,SQRT(2.5),0];
+	var p3 = [-0.5,SQRT(2.5),0];
 
+	var out =  TRIANGLE_DOMAIN(1, [p1, p2, [1,0.3,1]]);
+	var out2 = TRIANGLE_DOMAIN(1, [p1, p2, [1,SQRT(2.5)+0.04,1]]);
+	var out3 = TRIANGLE_DOMAIN(1, [p1, p3, [1,0.3,1]]);
+	var out4 =  TRIANGLE_DOMAIN(1, [p1 ,p3, [1,SQRT(2.5)+0.04,1]]);
+	var out5 =  TRIANGLE_DOMAIN(1, [p2 ,p3, [1,SQRT(2.5)+0.04,1]]);
+
+	var neckCover = STRUCT([out, out2, out3, out4, out5]);
+
+	return T([1])([0.75])(S([1])([0.5])(R([1,2])(PI/2.0)(neckCover)));
 };
+DRAW(neckCover());
+
+//baseBall = function(){
+//};
 //DRAW(baseBall);
 
 arm = function(){
@@ -170,61 +187,61 @@ arm = function(){
 DRAW(arm());
 
 engines = function(){
-	//var innerEngineDom = DOMAIN([[0,PI],[0,PI]])([2*sect,sect]);
-	//var innerEngine = T([2])([0.641])(S([0,1,2])([0.6,0.6,0.40])(R([1,2])(PI/2.0)(MAP(SPHERE)(innerEngineDom))));
+	var engineMainDom = DOMAIN([[0.8,2.1],[0,2*PI]])([sect,2*sect]);
+	var engineMain = MAP(SPHERE)(engineMainDom);
 
-	 var engineMainDom = DOMAIN([[0.8,2.1],[0,2*PI]])([2*sect,sect]);
-	 var engineMain = MAP(SPHERE)(engineMainDom);
+	var innerEngineDom = DOMAIN([[0,PI],[0,PI]])([2*sect,sect]);
+	var innerEngine = T([2])([0.641])(S([0,1,2])([0.6,0.6,0.40])(R([1,2])(PI/2.0)(MAP(SPHERE)(innerEngineDom))));
 
-	// var flapDom = DOMAIN([[2.7,PI],[0,PI-0.5]])([framesect,doorsect]);
-	// var flap =  R([1,2])(-PI/3.3)(R([1,2])(PI)(MAP(SPHERE)(flapDom)) );
-	// var flaps = STRUCT( REPLICA(6)([R([0,1])([PI/3.0]), flap]));
+	var flapDom = DOMAIN([[2.7,PI],[0,PI-0.5]])([framesect,doorsect]);
+	var flap =  R([1,2])(-PI/3.3)(R([1,2])(PI)(MAP(SPHERE)(flapDom)) );
+	var flaps = STRUCT( REPLICA(6)([R([0,1])([PI/3.0]), flap]));
 
-	// var innerDisk = COLOR(BLACK)(T([2])([0.6])(DISK(0.8)([10,1])));
-	// var innerBlueDisk = COLOR(BLACK)(T([2])([-0.4])(DISK(0.9)([10,1])));
+	var innerDisk = COLOR(BLACK)(T([2])([0.6])(DISK(0.8)([10,1])));
+	var innerBlueDisk = COLOR(BLACK)(T([2])([-0.4])(DISK(0.9)([10,1])));
 
-	// var centralSeamDom = DOMAIN([[(PI-0.02)/2.0,(PI+0.02)/2.0],[0,2*PI]])([1,sect]);
-	// var centralSeam =  Sk(1.001)(MAP(SPHERE)(centralSeamDom));
+	var centralSeamDom = DOMAIN([[(PI-0.02)/2.0,(PI+0.02)/2.0],[0,2*PI]])([1,sect]);
+	var centralSeam =  Sk(1.001)(MAP(SPHERE)(centralSeamDom));
 
-	// var exhaustChromeDom = DOMAIN([[2.1,2.2],[0,2*PI]])([1,sect]);
-	// var exhaustChrome = MAP(SPHERE)(exhaustChromeDom);
+	var exhaustChromeDom = DOMAIN([[2.1,2.2],[0,2*PI]])([1,sect]);
+	var exhaustChrome = MAP(SPHERE)(exhaustChromeDom);
 
-	// var blueBeamDom = DOMAIN([[2.19,2.5],[0,2*PI]])([6,sect]);
-	// var blueBeam = COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeamDom));
-	// var blueBeam2Dom = DOMAIN([[1,PI-0.75],[0,2*PI]])([1,sect]);
-	// var blueBeam2 = T([2])([-0.1])( Sk(0.99)(COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeam2Dom))));
-	// blueBeam = Sk(0.995)(STRUCT([blueBeam, blueBeam2]));
+	var blueBeamDom = DOMAIN([[2.19,2.5],[0,2*PI]])([6,sect]);
+	var blueBeam = COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeamDom));
+	var blueBeam2Dom = DOMAIN([[1,PI-0.75],[0,2*PI]])([1,sect]);
+	var blueBeam2 = T([2])([-0.1])( Sk(0.99)(COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeam2Dom))));
+	blueBeam = Sk(0.995)(STRUCT([blueBeam, blueBeam2]));
 
-	// var exhaustShieldDom = DOMAIN([[2.53,PI],[0,2*PI]])([doorsect,sect]);
-	// var exhaustShield = MAP(SPHERE)(exhaustShieldDom);
+	var exhaustShieldDom = DOMAIN([[2.53,PI],[0,2*PI]])([doorsect,sect]);
+	var exhaustShield = MAP(SPHERE)(exhaustShieldDom);
 
-	// var exhaustHoleDom = DOMAIN([[PI-0.025,PI],[0,2*PI]])([1,12]);
-	// var exhaustHole = COLOR(BLACK)(T([2])([-0.001])(R([0,2])([-0.45])(MAP(SPHERE)(exhaustHoleDom))));
-	// var exhaustHole8 = R([1,2])([0.14])(STRUCT(REPLICA(8)([R([0,2])([0.09]), exhaustHole])));
-	// var exhaustHole9line = R([1,2])([0.07])(R([0,2])([-0.045])(STRUCT(REPLICA(9)([R([0,2])([0.09]), exhaustHole]))));
-	// var exhaustHole9 = STRUCT(REPLICA(5)([R([1,2])([0.14]), exhaustHole9line]));
-	// var exhaustHole10line = R([1,2])([0.14])(R([0,2])([-0.09])(STRUCT(REPLICA(10)([R([0,2])([0.09]), exhaustHole]))));
-	// var exhaustHole10 = STRUCT(REPLICA(4)([R([1,2])([0.14]), exhaustHole10line]));
-	// var exhaustHole8b = R([1,2])([0.7])(exhaustHole8);
-	// var exhaustHoles = R([0,2])([0.045])(R([1,2])([-0.07*7])(STRUCT([exhaustHole8, exhaustHole9, exhaustHole10,  exhaustHole8b])));
+	var exhaustHoleDom = DOMAIN([[PI-0.025,PI],[0,2*PI]])([1,12]);
+	var exhaustHole = COLOR(BLACK)(T([2])([-0.001])(R([0,2])([-0.45])(MAP(SPHERE)(exhaustHoleDom))));
+	var exhaustHole8 = R([1,2])([0.14])(STRUCT(REPLICA(8)([R([0,2])([0.09]), exhaustHole])));
+	var exhaustHole9line = R([1,2])([0.07])(R([0,2])([-0.045])(STRUCT(REPLICA(9)([R([0,2])([0.09]), exhaustHole]))));
+	var exhaustHole9 = STRUCT(REPLICA(5)([R([1,2])([0.14]), exhaustHole9line]));
+	var exhaustHole10line = R([1,2])([0.14])(R([0,2])([-0.09])(STRUCT(REPLICA(10)([R([0,2])([0.09]), exhaustHole]))));
+	var exhaustHole10 = STRUCT(REPLICA(4)([R([1,2])([0.14]), exhaustHole10line]));
+	var exhaustHole8b = R([1,2])([0.7])(exhaustHole8);
+	var exhaustHoles = R([0,2])([0.045])(R([1,2])([-0.07*7])(STRUCT([exhaustHole8, exhaustHole9, exhaustHole10,  exhaustHole8b])));
 
-	// var exhaustFlapDom = DOMAIN([ [2.2,PI-0.75 ], [2,2.5]])([6,6]);
-	// var exhaustFlap = COLOR([0.5,0.5,0.5,1])(MAP(SPHERE)(exhaustFlapDom));
-	// var exhaustFlaps = R([0,1])(PI)(STRUCT( REPLICA(12)([R([0,1])([PI/6.0]), exhaustFlap])));
+	var exhaustFlapDom = DOMAIN([ [2.2,PI-0.75 ], [2,2.5]])([6,6]);
+	var exhaustFlap = COLOR([0.5,0.5,0.5,1])(MAP(SPHERE)(exhaustFlapDom));
+	var exhaustFlaps = R([0,1])(PI)(STRUCT( REPLICA(12)([R([0,1])([PI/6.0]), exhaustFlap])));
 
-	// var exhaustBodyDom = DOMAIN([[0,1],[0,2*PI]])([2*sect,sect]);
-	// var exhaustBodyProfile = BEZIER(S0)([ [2.8,2.8,0],[2.8,2.8,0],[2.8,2.8,0],   [3,3,0],[3,3,0],[3,3,0],
-	// 	[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],
-	// 	[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],
-	// 	[3.3,3.3,2],[3.3,3.3,2],[3.3,3.3,2] ]);
-	// var exhaustBodyMap = ROTATIONAL_SURFACE(exhaustBodyProfile);
-	// var exhaustBody = Sk(1/5)(T([2])([-4.1])(MAP(exhaustBodyMap)(exhaustBodyDom) ));
+	var exhaustBodyDom = DOMAIN([[0,1],[0,2*PI]])([2*sect,sect]);
+	var exhaustBodyProfile = BEZIER(S0)([ [2.8,2.8,0],[2.8,2.8,0],[2.8,2.8,0],   [3,3,0],[3,3,0],[3,3,0],
+		[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],[3,3,0.6],
+		[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],[3.3,3.3,1.2],
+		[3.3,3.3,2],[3.3,3.3,2],[3.3,3.3,2] ]);
+	var exhaustBodyMap = ROTATIONAL_SURFACE(exhaustBodyProfile);
+	var exhaustBody = Sk(1/5)(T([2])([-4.1])(MAP(exhaustBodyMap)(exhaustBodyDom) ));
 
-//	whiteEngine = COLOR([1.5,1.5,1.5,1])(STRUCT([engineMain, innerEngine, flaps]));
-//	var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine, innerDisk, innerBlueDisk, centralSeam, exhaustChrome, exhaustHoles, exhaustShield, exhaustBody, exhaustFlaps, blueBeam, exhaustHoles])));
+	var whiteEngine = COLOR([1.5,1.5,1.5,1])(STRUCT([engineMain, innerEngine, flaps]));
+	var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine, innerDisk, innerBlueDisk, centralSeam, exhaustChrome, exhaustHoles, exhaustShield, exhaustBody, exhaustFlaps, blueBeam, exhaustHoles])));
 
-	var whiteEngine = COLOR([1.5,1.5,1.5,1])(STRUCT([engineMain ]));
-	var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine])));
+	// var whiteEngine = COLOR([1.5,1.5,1.5,1])(STRUCT([engineMain ]));
+	// var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine])));
 	return Sk(0.8)(STRUCT([engine1, T([0])([6])(engine1)]));
 };
 DRAW(engines());
@@ -268,7 +285,33 @@ tailRotor = function(){
 	var centralDiskBandMap = ROTATIONAL_SURFACE(centralDiskBandProfile);
 	var centralDiskBandObj = MAP(centralDiskBandMap)(tailRotorInnDom);
 	var centralDisk = STRUCT([centralDiskBandObj, T([2])([-0.101])(DISK(1.4)([sect,1])) , T([2])([0.101])(DISK(1.4)([sect,1])) ]);
-	
+
 	return T([0,1,2])([1,5.4,1.5])(R([0,2])(PI/2.0)(Sk(0.2)(STRUCT([centralDisk, tailBlade, tailRotorExt, tailRotorCenterObj, R([0,2])(PI)(tailRotorCenterObj), tailRotorInnObj, R([0,2])(PI)(tailRotorInnObj), tailRotorInnBandObj]))));
 };
 DRAW(tailRotor());
+
+//****Tet - draft****//
+tet = function(){
+var points = [[0,0,0],[1,SQRT(3),0],[2,0,0],[3,SQRT(3),0],[4,0,0],[5,SQRT(3),0],[6,0,0],[7,SQRT(3),0],[8,0,0],[9,SQRT(3),0],[10,0,0],[11,SQRT(3),0],[12,0,0]];
+triStrip1 = TRIANGLE_STRIP(points);
+points = [[0,0,0],[1,-SQRT(3),0],[2,0,0],[3,-SQRT(3),0],[4,0,0],[5,-SQRT(3),0],[6,0,0],[7,-SQRT(3),0],[8,0,0],[9,-SQRT(3),0],[10,0,0],[11,-SQRT(3),0],[12,0,0]];
+triStrip2 = TRIANGLE_STRIP(points);
+points = [[1,-SQRT(3),0],[2,-2*SQRT(3),0],[3,-SQRT(3),0],[4,-2*SQRT(3),0],[5,-SQRT(3),0],[6,-2*SQRT(3),0],[7,-SQRT(3),0],[8,-2*SQRT(3),0],[9,-SQRT(3),0],[10,-2*SQRT(3),0],[11,-SQRT(3),0] ];
+triStrip3 = TRIANGLE_STRIP(points);
+points = [[2,-2*SQRT(3),0],[3,-3*SQRT(3),0],[4,-2*SQRT(3),0],[5,-3*SQRT(3),0],[6,-2*SQRT(3),0],[7,-3*SQRT(3),0],[8,-2*SQRT(3),0],[9,-3*SQRT(3),0],[10,-2*SQRT(3),0] ];
+triStrip4 = TRIANGLE_STRIP(points);
+points = [ [3,-3*SQRT(3),0],[4,-4*SQRT(3),0],[5,-3*SQRT(3),0],[6,-4*SQRT(3),0],[7,-3*SQRT(3),0],[8,-4*SQRT(3),0],[9,-3*SQRT(3),0]];
+triStrip5 = TRIANGLE_STRIP(points);
+points = [  [4,-4*SQRT(3),0],[5,-5*SQRT(3),0],[6,-4*SQRT(3),0],[7,-5*SQRT(3),0],[8,-4*SQRT(3),0] ];
+triStrip6 = TRIANGLE_STRIP(points);
+
+var tetFace1 =  T([0,1])([-6*SQRT(3),-1])(R([0,1])([PI/6.0])(STRUCT([ triStrip1, triStrip2, triStrip3, triStrip4, triStrip5, triStrip6])));
+var tetFace2 = R([0,2])([Math.acos(1/3)])(tetFace1);
+tetFace1 = T([0])([2.331*SQRT(3)]) (tetFace1);
+tetFace2 = T([0])([2.331*SQRT(3)]) (tetFace2);
+tetFace3 = R([0,1])([4*PI/3.0])(tetFace2);
+tetFace4 = R([0,1])([-4*PI/3.0])(tetFace2);
+
+return COLOR255([5,30,35,1])(R([0,2])(PI)(T([0,1,2])([500,-1500,-200])(Sk(100)(STRUCT([tetFace1, tetFace2, tetFace3, tetFace4])))));
+};
+DRAW(tet());

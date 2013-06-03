@@ -37,9 +37,8 @@ var TORUS = function (R,r){
 };
 
 //settori dei domini 
-var sect = 36;
+var sect = 40;
 var framesect = 12;
-var doorsect = 36;
 
 //Colori
 var BLACK = [0,0,0,1];
@@ -95,7 +94,7 @@ cockpit = function(){
 	var cockpitBubbleDom = DOMAIN([[0,3*PI/4.0],[0,2*PI]])([sect,2*sect]);
 	var cockpitBubble = MAP(SPHERE)(cockpitBubbleDom);
 
-	var cockpitDoorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
+	var cockpitDoorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([sect,sect]);
 	var cockpitDoor = T([0,1,2])([-0.3,0,-PI/4.5])(R([0,2])(-PI/4.0)(MAP(SPHERE)(cockpitDoorDom)));
 
 	var cockpitGlass = COLOR255([160,210,255,0.5])(STRUCT([cockpitBubble, cockpitDoor]));
@@ -115,10 +114,10 @@ cockpit = function(){
 	var IncockpitClosedDoorFrameDom = DOMAIN([[(PI-0.5)/4.0, (PI+0.1)/4.0],[0,2*PI]])([framesect,sect]);
 	var IncockpitClosedDoorFrame = MAP(SPHERE)(IncockpitClosedDoorFrameDom);
 
-	var IncockpitBackDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
+	var IncockpitBackDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([sect,sect]);
 	var IncockpitBack = R([0,2])(-PI/2.0)(MAP(SPHERE)(IncockpitBackDom));
 
-	var IncockpitFloorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([doorsect,sect]);
+	var IncockpitFloorDom = DOMAIN([[3*PI/4.0,PI],[0,2*PI]])([sect,sect]);
 	var IncockpitFloor = R([1,2])(-PI/2.0)(MAP(SPHERE)(IncockpitFloorDom));
 
 	var IncockpitUpDom = DOMAIN([[(PI-0.25)/2.0,(PI+0.25)/2.0],[PI/4,3*PI/4.0]])([framesect,sect]);
@@ -187,20 +186,20 @@ arm = function(){
 //DRAW(arm());
 
 engines = function(){
-	var engineMainDom = DOMAIN([[0.8,2.1],[0,2*PI]])([sect,2*sect]);
+	var engineMainDom = DOMAIN([[0.8,2.1],[0,2*PI]])([sect,3*sect]);
 	var engineMain = MAP(SPHERE)(engineMainDom);
 
 	var innerEngineDom = DOMAIN([[0,PI],[0,PI]])([2*sect,sect]);
 	var innerEngine = T([2])([0.641])(S([0,1,2])([0.6,0.6,0.40])(R([1,2])(PI/2.0)(MAP(SPHERE)(innerEngineDom))));
 
-	var flapDom = DOMAIN([[2.7,PI],[0,PI-0.5]])([framesect,doorsect]);
+	var flapDom = DOMAIN([[2.7,PI],[0,PI-0.5]])([framesect,sect]);
 	var flap =  R([1,2])(-PI/3.3)(R([1,2])(PI)(MAP(SPHERE)(flapDom)) );
 	var flaps = STRUCT( REPLICA(6)([R([0,1])([PI/3.0]), flap]));
 
 	var innerDisk = COLOR(BLACK)(T([2])([0.6])(DISK(0.8)([10,1])));
 	var innerBlueDisk = COLOR(BLACK)(T([2])([-0.4])(DISK(0.9)([10,1])));
 
-	var centralSeamDom = DOMAIN([[(PI-0.02)/2.0,(PI+0.02)/2.0],[0,2*PI]])([1,sect]);
+	var centralSeamDom = DOMAIN([[(PI-0.02)/2.0,(PI+0.02)/2.0],[0,2*PI]])([1,3*sect]);
 	var centralSeam =  Sk(1.001)(MAP(SPHERE)(centralSeamDom));
 
 	var exhaustChromeDom = DOMAIN([[2.1,2.2],[0,2*PI]])([1,sect]);
@@ -212,7 +211,7 @@ engines = function(){
 	var blueBeam2 = T([2])([-0.1])( Sk(0.99)(COLOR255([30,180,255,0.7])(MAP(SPHERE)(blueBeam2Dom))));
 	blueBeam = Sk(0.995)(STRUCT([blueBeam, blueBeam2]));
 
-	var exhaustShieldDom = DOMAIN([[2.53,PI],[0,2*PI]])([doorsect,sect]);
+	var exhaustShieldDom = DOMAIN([[2.53,PI],[0,2*PI]])([sect,sect]);
 	var exhaustShield = MAP(SPHERE)(exhaustShieldDom);
 
 	var exhaustHoleDom = DOMAIN([[PI-0.025,PI],[0,2*PI]])([1,12]);
@@ -258,10 +257,10 @@ tail = function(){
 //DRAW(tail());
 
 tailRotor = function(){
-	var tailRotorExtDom = DOMAIN([[-1, 1],[0,2*PI]])([framesect,sect]);
+	var tailRotorExtDom = DOMAIN([[-1, 1],[0,2*PI]])([sect,3*sect]);
 	var tailRotorExt = COLOR(WHITE)(Sk(0.844)(MAP(TORUS(3,1))(tailRotorExtDom)));
 
-	var tailRotorInnDom = DOMAIN([[0,1],[0,2*PI]])([2*12,24]);
+	var tailRotorInnDom = DOMAIN([[0,1],[0,2*PI]])([sect,3*sect]);
 	var tailRotorInnProfile = BEZIER(S0)([ [2.2,0,0.1],[2.2,0,0.1],[2.2,0,0.3],[2.2,0,0.3],[2.2,0,0.3], [2.5,0,0.3], [3,0,0.7]]);
 	var tailRotorInnMap = ROTATIONAL_SURFACE(tailRotorInnProfile);
 	var tailRotorInnObj = MAP(tailRotorInnMap)(tailRotorInnDom);
@@ -269,7 +268,7 @@ tailRotor = function(){
 	var tailRotorInnBandMap = ROTATIONAL_SURFACE(tailRotorInnBandProfile);
 	var tailRotorInnBandObj = COLOR(BLACK)(MAP(tailRotorInnBandMap)(tailRotorInnDom));
 
-	var tailRotorCenterDom = DOMAIN([[0,1],[0,2*PI]])([2*12,24]);
+	var tailRotorCenterDom = DOMAIN([[0,1],[0,2*PI]])([sect,2*sect]);
 	var tailRotorCenterProfile = BEZIER(S0)([ [1.3,0,0.1],[1.3,0,0.1],[1.3,0,0.3],[1.3,0,0.3], [0.3,0,0.5],[0.3,0,0.5],[0.3,0,0.5], [0,0,1.5]]);
 	var tailRotorCenterMap = ROTATIONAL_SURFACE(tailRotorCenterProfile);
 	var tailRotorCenterObj = COLOR(WHITE)(MAP(tailRotorCenterMap)(tailRotorCenterDom));

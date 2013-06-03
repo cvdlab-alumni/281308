@@ -54,21 +54,21 @@ universe = function(){
 	var universe = Sk(10000)(MAP(SPHERE)(universeDom));
 	return COLOR(BLACK)(universe);
 };
-DRAW(universe());
+//DRAW(universe());
 
 earth = function(){
 	var earthDom = DOMAIN([[0,PI/2.0],[0,2*PI]])([72,172]);
 	var earth = T([2])([-12000])(Sk(10000)(MAP(SPHERE)(earthDom)));
 	return COLOR255([10,110,200,1])(earth);
 };
-DRAW(earth());
+//DRAW(earth());
 
 atmosphere = function(){
 	var atmosphereDom = DOMAIN([[0,PI/2.0],[0,2*PI]])([72,172]);
 	var atmosphere = T([2])([-12000])(Sk(11000)(MAP(SPHERE)(atmosphereDom)));
 	return COLOR255([200, 240, 255,0.65])(atmosphere);
 };
-DRAW(atmosphere());
+//DRAW(atmosphere());
 
 
 //****Bubbleship****//
@@ -87,7 +87,7 @@ tetrahedralCore = function(){
 	var core = T([1])([0.75])(STRUCT([core_faceX, core_faceYL, core_faceYR, core_faceZ]));
 	return COLOR(WHITE)(core);
 };
-DRAW(tetrahedralCore());
+//DRAW(tetrahedralCore());
 
 cockpit = function(){
 
@@ -141,17 +141,17 @@ cockpit = function(){
 
 	return cockpitObj;
 };
-DRAW(cockpit());
+//DRAW(cockpit());
 
 //Neck
 neck = function(){
-	var neckDom = DOMAIN([[0,1],[0,2*PI]])([2*sect,sect]);
+	var neckDom = DOMAIN([[0,1],[0,2*PI]])([sect,2*sect]);
 	var neckProfile = BEZIER(S0)([[3,3,0],[3,3,0.2],[3,3,0.2],[3,3,0.2], [1.5,1.5,0.8],[1.5,1.5,0.8], [2,2,2.5],[2,2,2.5], [2,2,3],[2,2,3],[2,2,3],[2,2,3], [3,3,4],[3,3,4],[3,3,4], [3,3,4.5],[3,3,4.5],[3,3,4.5]]);
 	var neckMap = ROTATIONAL_SURFACE(neckProfile);
 	var neckObj = MAP(neckMap)(neckDom);
 	return Sk(1/4.5)(T([0,1,2])([4.5,-1.15,4.5])(R([1,2])(-PI/2.0)(neckObj)));
 };
-DRAW(neck());
+//DRAW(neck());
 
 //Neck cover
 neckCover = function(){
@@ -169,7 +169,7 @@ neckCover = function(){
 
 	return T([1])([0.75])(S([1])([0.5])(R([1,2])(PI/2.0)(neckCover)));
 };
-DRAW(neckCover());
+//DRAW(neckCover());
 
 //baseBall = function(){
 //};
@@ -184,7 +184,7 @@ arm = function(){
 	var armObj = STRUCT([armHalf, T([2])([h])(R([0,2])(PI)(armHalf))]);
 	return COLOR(WHITE)(T([0,1,2])([-0.75,0.75,SQRT(2)])(R([1,2])(PI/2.0)(R([0,2])(PI/2.0)(Sk(0.1)(armObj)))));
 };
-DRAW(arm());
+//DRAW(arm());
 
 engines = function(){
 	var engineMainDom = DOMAIN([[0.8,2.1],[0,2*PI]])([sect,2*sect]);
@@ -244,7 +244,7 @@ engines = function(){
 	// var engine1 = T([0,1,2])([-1.75,0.85,1.95])(R([1,2])(PI/2.0)(STRUCT([whiteEngine])));
 	return Sk(0.8)(STRUCT([engine1, T([0])([6])(engine1)]));
 };
-DRAW(engines());
+//DRAW(engines());
 
 tail = function(){
 	var tailDom = PROD1x1([INTERVALS(1)(40),INTERVALS(1)(6)]);
@@ -255,7 +255,7 @@ tail = function(){
 	var tailObj = STRUCT([tailHalf, T([2])([h])(R([0,2])(PI)(tailHalf))]);
 	return COLOR(WHITE)(T([0,1,2])([1,2,1.4])(R([1,2])(-PI/2.0)(R([0,1])(-PI)(Sk(0.1)(tailObj)))));
 };
-DRAW(tail());
+//DRAW(tail());
 
 tailRotor = function(){
 	var tailRotorExtDom = DOMAIN([[-1, 1],[0,2*PI]])([framesect,sect]);
@@ -288,7 +288,7 @@ tailRotor = function(){
 
 	return T([0,1,2])([1,5.4,1.5])(R([0,2])(PI/2.0)(Sk(0.2)(STRUCT([centralDisk, tailBlade, tailRotorExt, tailRotorCenterObj, R([0,2])(PI)(tailRotorCenterObj), tailRotorInnObj, R([0,2])(PI)(tailRotorInnObj), tailRotorInnBandObj]))));
 };
-DRAW(tailRotor());
+//DRAW(tailRotor());
 
 //****Tet - draft****//
 tet = function(){
@@ -314,4 +314,7 @@ tetFace4 = R([0,1])([-4*PI/3.0])(tetFace2);
 
 return COLOR255([5,30,35,1])(R([0,2])(PI)(T([0,1,2])([500,-1500,-200])(Sk(100)(STRUCT([tetFace1, tetFace2, tetFace3, tetFace4])))));
 };
-DRAW(tet());
+//DRAW(tet());
+
+model = STRUCT([universe(), earth(), atmosphere(), tetrahedralCore(), cockpit(), neck(), neckCover(), arm(),
+engines(), tail(), tailRotor(), tet()]);

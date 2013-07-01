@@ -88,6 +88,34 @@ tetrahedralCore = function(){
 };
 //DRAW(tetrahedralCore());
 
+
+//refinements
+tetrahedralCoreTop = function(){
+
+	var p1 = [1.65,-0.65,SQRT(2.5)+0.04];
+	var p1b = [0.35,-0.65,SQRT(2.5)+0.04];
+
+	var p2 = [2.5,0,SQRT(2.5)];
+	var p3 = [-0.5,0,SQRT(2.5)];
+	var p4 = [1,SQRT(3),SQRT(2.5)];
+	var p5 = [1,0,2];
+
+	var core_faceB =  COLOR(BLACK)(TRIANGLE_DOMAIN(1, [p1, p1b, p5]));
+
+	var core_faceX =  TRIANGLE_DOMAIN(1, [p1, p2, p5]);
+	var core_faceYL = TRIANGLE_DOMAIN(1, [p1b, p3, p5]);
+	var core_faceYR = TRIANGLE_DOMAIN(1, [p3, p4, p5]);
+	var core_faceZ =  TRIANGLE_DOMAIN(1, [p2 ,p4, p5]);
+
+	var stripe = COLOR(BLACK)(T([0,1,2])([0.9,0,1.897])(R([1,2])(-PI/14)(CUBOID([0.18,1.6,0.1]))));
+	var whiteTriangles = COLOR(WHITE)(STRUCT([core_faceX, core_faceYL, core_faceYR, core_faceZ]));
+
+	var core = T([1])([0.75])(STRUCT([whiteTriangles, core_faceB, stripe]));
+
+	return core;
+};
+//DRAW(tetrahedralCoreTop());
+
 cockpit = function(){
 
 	//Glass
@@ -175,7 +203,7 @@ neckCover = function(){
 
 	return T([1])([0.75])(S([1])([0.5])(R([1,2])(PI/2.0)(neckCover)));
 };
-DRAW(neckCover());
+//DRAW(neckCover());
 
 
 baseBall = function(){
@@ -196,7 +224,7 @@ baseBall = function(){
 
 	return T([0,1,2])([1,0.75,0])(Sk(0.3)(STRUCT([ball1])));
 };
-DRAW(baseBall());
+//DRAW(baseBall());
 
 arm = function(){
 	var armDom = PROD1x1([INTERVALS(1)(40),INTERVALS(1)(6)]);
@@ -281,7 +309,7 @@ tail = function(){
 	var tailS = STRUCT([tailObj, stripe]);
 	return T([0,1,2])([1,2,1.4])(R([1,2])(-PI/2.0)(R([0,1])(-PI)(Sk(0.1)(tailS))));
 };
-DRAW(tail());
+//DRAW(tail());
 
 tailRotor = function(){
 	var tailRotorExtDom = DOMAIN([[-1, 1],[0,2*PI]])([sect,3*sect]);
@@ -343,33 +371,5 @@ return COLOR255([5,30,35,1])(R([0,2])(PI)(T([0,1,2])([500,-1500,-200])(Sk(100)(S
 //DRAW(tet());
 
 model = STRUCT([universe(), earth(), atmosphere(), tetrahedralCore(), cockpit(), neck(), neckCover(), arm(),
-engines(), tail(), tailRotor(), tet()]);
-DRAW(model);
-
-
-//refinements
-tetrahedralCoreTop = function(){
-
-	var p1 = [1.65,-0.65,SQRT(2.5)+0.04];
-	var p1b = [0.35,-0.65,SQRT(2.5)+0.04];
-
-	var p2 = [2.5,0,SQRT(2.5)];
-	var p3 = [-0.5,0,SQRT(2.5)];
-	var p4 = [1,SQRT(3),SQRT(2.5)];
-	var p5 = [1,0,2];
-
-	var core_faceB =  COLOR(BLACK)(TRIANGLE_DOMAIN(1, [p1, p1b, p5]));
-
-	var core_faceX =  TRIANGLE_DOMAIN(1, [p1, p2, p5]);
-	var core_faceYL = TRIANGLE_DOMAIN(1, [p1b, p3, p5]);
-	var core_faceYR = TRIANGLE_DOMAIN(1, [p3, p4, p5]);
-	var core_faceZ =  TRIANGLE_DOMAIN(1, [p2 ,p4, p5]);
-
-	var stripe = COLOR(BLACK)(T([0,1,2])([0.9,0,1.897])(R([1,2])(-PI/14)(CUBOID([0.18,1.6,0.1]))));
-	var whiteTriangles = COLOR(WHITE)(STRUCT([core_faceX, core_faceYL, core_faceYR, core_faceZ]));
-
-	var core = T([1])([0.75])(STRUCT([whiteTriangles, core_faceB, stripe]));
-
-	return core;
-};
-DRAW(tetrahedralCoreTop());
+engines(), tail(), tailRotor(), tet(), baseBall(), tetrahedralCoreTop()]);
+//DRAW(model);
